@@ -1,11 +1,17 @@
 com\exemplo\projeto\repository\ProdutoRepository.class
 com\exemplo\projeto\service\PedidoService.class
+com\exemplo\projeto\auth\LoginRequestDTO.class
+com\exemplo\projeto\security\SecurityConfig.class
+com\exemplo\projeto\controller\dto\PedidoRequestDTO.class
+com\exemplo\projeto\security\JwtUtil.class
 com\exemplo\projeto\service\ResourceNotFoundException.class
 com\exemplo\projeto\repository\ClienteRepository.class
+com\exemplo\projeto\auth\AuthController.class
 com\exemplo\projeto\controller\exception\GlobalExceptionHandler.class
 com\exemplo\projeto\model\Cliente.class
 com\exemplo\projeto\model\Produto.class
 com\exemplo\projeto\controller\PedidoController.class
 com\exemplo\projeto\repository\PedidoRepository.class
 com\exemplo\projeto\ProjetoApiApplication.class
+com\exemplo\projeto\security\JwtAuthenticationFilter.class
 com\exemplo\projeto\model\Pedido.class
