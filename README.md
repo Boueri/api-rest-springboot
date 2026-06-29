@@ -1,115 +1,127 @@
-# 🌐 API Corporativa - Sistema Backend RESTful
+# 🚀 API REST - Spring Boot
 
-API desenvolvida em **Java 17** e **Spring Boot 3.3**, estruturada em camadas de mercado e equipada com segurança baseada em tokens (JWT), documentação interativa automatizada e banco de dados em memória.
+API REST desenvolvida com Spring Boot para gerenciamento de dados com autenticação JWT, persistência em banco de dados e documentação via Swagger.
 
-Este projeto foi evoluído de uma estrutura básica para um ecossistema backend moderno, aplicando padrões de segurança corporativa e facilidade de deploy/execução local.
-
----
-
-## 🚀 Funcionalidades Atuais
-
-- **CRUD Completo de Usuários:** Cadastro, listagem, atualização e exclusão de registros.
-- **Segurança Avançada (Spring Security 3):** Proteção de endpoints privados com arquitetura *Stateless*.
-- **Autenticação JWT (JSON Web Token):** Filtros customizados para interceptação e validação de tokens `Bearer`.
-- **Banco de Dados em Memória (H2 Database):** Inicialização instantânea do banco direto na memória RAM, eliminando a necessidade de instalações locais complexas.
-- **Painel de Monitoramento SQL:** Console web integrado para inspecionar tabelas e dados em tempo real.
-- **Documentação Automatizada (Swagger/OpenAPI):** Interface gráfica para testar todos os endpoints direto do navegador.
-- **Validação de Dados:** Filtros com `spring-boot-starter-validation` para garantir a integridade dos payloads (DTOs).
+Este projeto foi criado com foco em boas práticas de desenvolvimento backend, segurança e arquitetura em camadas, simulando um ambiente real de produção.
 
 ---
 
-## 🧠 Tecnologias Utilizadas
+## 🧠 Objetivo do Projeto
 
-- **Java 17** (LTS)
-- **Spring Boot 3.3.5**
-- **Spring Web** (Construção de rotas REST)
-- **Spring Data JPA** (Persistência e ORM)
-- **Spring Security** (Controle de acessos)
-- **H2 Database** (Banco de Dados em memória)
-- **JSON Web Token (JJWT 0.11.5)** (Geração e validação de tokens)
-- **Springdoc OpenAPI / Swagger UI** (Documentação da API)
-- **Maven** (Gerenciador de dependências e build)
+O objetivo desta API é demonstrar a construção de um backend completo utilizando Java + Spring Boot, incluindo:
+
+- Autenticação e autorização com JWT
+- CRUD completo de recursos
+- Integração com banco de dados relacional
+- Documentação automática da API
+- Estrutura organizada em camadas (Controller, Service, Repository)
 
 ---
 
-## 📁 Estrutura do Projeto
+## ⚙️ Tecnologias Utilizadas
 
-```text
-├── src/main/java/com/exemplo/projeto/
-│   ├── controller/          # Exposição dos endpoints REST
-│   │   └── UsuarioController.java
-│   ├── service/             # Regras de negócio da aplicação
-│   │   └── UsuarioService.java
-│   ├── repository/          # Interface de comunicação com o banco (JPA)
-│   │   └── UsuarioRepository.java
-│   ├── model/               # Entidades mapeadas para o banco de dados
-│   │   └── Usuario.java
-│   ├── security/            # Filtros JWT e configurações do Spring Security
-│   │   ├── SecurityConfig.java
-│   │   └── JwtAuthenticationFilter.java
-│   └── ApiApplication.java  # Classe principal (Inicializadora)
-│
-├── src/main/resources/
-│   └── application.properties # Parâmetros do H2, Hibernate e Swagger
-│
-├── pom.xml                  # Dependências e plugins do Maven
-└── README.md                # Documentação do repositório
+- ☕ Java 17+
+- 🌱 Spring Boot
+- 🔐 Spring Security + JWT
+- 🗄️ Spring Data JPA
+- 🐘 Banco de dados (MySQL / PostgreSQL)
+- 📄 Swagger / OpenAPI
+- 🧪 Maven
+
+---
+
+## 🏗️ Arquitetura do Projeto
+
+O projeto segue arquitetura em camadas:
+controller → service → repository → database
+
+
+### 📦 Estrutura de pacotes:
+``` 
+src
+  controller
+  service
+  repository
+  model
+  dto
+  security
+  config
+  exception
+```
+---
+
+## 🔐 Autenticação (JWT)
+
+A API utiliza autenticação baseada em token JWT.
+
+### Fluxo:
+
+1. Usuário realiza login
+2. API retorna token JWT
+3. Token é enviado no header das requisições protegidas:
+
 ```
 
-⚙️ Como Executar o Projeto
-Você não precisa ter o PostgreSQL ou MySQL instalado. O projeto está configurado para rodar de forma independente.
+Authorization: Bearer YOUR\_TOKEN
+
+📡 Endpoints principais
+🔑 Auth
+POST /auth/login → Autentica usuário e retorna JWT
+POST /auth/register → Cria novo usuário
+👤 Usuários
+GET /users → Lista usuários
+GET /users/{id} → Busca usuário por ID
+POST /users → Cria usuário
+PUT /users/{id} → Atualiza usuário
+DELETE /users/{id} → Remove usuário
+📄 Documentação (Swagger)
+```
+
+A documentação da API está disponível via Swagger:
+
+
+http://localhost:8080/swagger-ui.html
+
+🗄️ Banco de Dados
+
+Configuração realizada via application.properties.
+
+Exemplo:
+
+
+spring.datasource.url=jdbc:mysql://localhost:3306/nome\_db
+spring.datasource.username=root
+spring.datasource.password=senha
+
+
+🚀 Como executar o projeto
 
 1. Clonar o repositório
+git clone https://github.com/Boueri/api-rest-springboot.git
 
-git clone [https://github.com/Boueri/api-java.git](https://github.com/Boueri/api-java.git)
-cd api-java
+3. Entrar no diretório
+cd api-rest-springboot
 
-2. Compilar e Rodar a Aplicação
-Utilize o Maven Wrapper ou o executável local apontando para a pasta do projeto:
+4. Configurar banco de dados
 
-.\apache-maven-3.9.6\bin\mvn clean spring-boot:run
+Editar application.properties
 
-4. Acessar a Documentação (Swagger UI)
-Assim que o terminal exibir que o Spring iniciou, abra o navegador e acesse para testar os endpoints:
-👉 http://localhost:8080/swagger-ui/index.html
+5. Rodar aplicação
+mvn spring-boot:run
 
-5. Acessar o Banco de Dados (H2 Console)
-Para visualizar as tabelas criadas automaticamente pelo Hibernate:
-👉 http://localhost:8080/h2-console
 
-JDBC URL: jdbc:h2:mem:projetodb
+🐳 (Opcional) Rodando com Container (Podman)
+Build da imagem:
+podman build -t api-springboot .
+Executar container:
+podman run -p 8080:8080 api-springboot
 
-User Name: sa
 
-Password: (deixe em branco)
-
-📌 Principais Endpoints
-🔓 Rotas Públicas (Livres de Autenticação)
-POST /auth/login -> Realiza autenticação e retorna o Token JWT.
-
-GET /swagger-ui/index.html -> Visualização da documentação.
-
-GET /h2-console -> Gerenciador do banco de dados.
-
-🔐 Rotas Protegidas (Requer Token Bearer <TOKEN> no Header)
-GET /usuarios -> Listar todos os usuários.
-
-POST /usuarios -> Criar um novo usuário.
-
-PUT /usuarios/{id} -> Atualizar dados do usuário.
-
-DELETE /usuarios/{id} -> Excluir usuário do sistema.
-
-🚀 Próximos Passos (Melhorias Futuras)
-[ ] Migração do banco de dados H2 para PostgreSQL/MySQL em ambiente de produção usando Profiles do Spring.
-
-[ ] Implementação de Testes Unitários e de Integração com JUnit 5 e Mockito.
-
-[ ] Conteinerização da aplicação utilizando Docker e Docker Compose.
-
-[ ] Criação de script de migração de banco de dados com Flyway.
-
+Logs estruturados
 👨‍💻 Autor
-João Gabriel Boueri Santos
 
-Projeto desenvolvido para consolidar conceitos de Arquitetura Limpa, Segurança em APIs REST e persistência de dados com o ecossistema Spring.
+Desenvolvido por Bou
+
+GitHub: https://github.com/Boueri
+
+LinkedIn: www.linkedin.com/in/joao-gabriel-boueri
