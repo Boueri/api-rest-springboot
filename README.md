@@ -91,6 +91,8 @@ PUT    /users/{id}
 DELETE /users/{id}
 📄 Documentação (Swagger)
 ```
+
+
 A documentação da API pode ser acessada em:
 
 http://localhost:8080/swagger-ui.html
@@ -124,4 +126,5 @@ podman run -p 8080:8080 api-springboot
 Desenvolvido por Bou
 
 GitHub: https://github.com/Boueri
+
 LinkedIn: www.linkedin.com/in/joao-gabriel-boueri
