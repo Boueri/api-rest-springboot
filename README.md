@@ -117,6 +117,8 @@ Build da imagem
 podman build -t api-springboot .
 Executar container
 podman run -p 8080:8080 api-springboot
+
+
 👨‍💻 Autor
 
 Desenvolvido por Bou
