@@ -1,0 +1,40 @@
+services:
+  # Serviço da sua API (Spring Boot)
+  api:
+    build: .
+    container_name: api-corporativa
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    environment:
+      # Essas variáveis sobrescrevem as configurações do application.properties
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db_projeto
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin123
+    networks:
+      - rede-projeto
+
+  # Serviço do Banco de Dados (PostgreSQL)
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: db_projeto
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - rede-projeto
+
+# Rede para os dois containers se comunicarem
+networks:
+  rede-projeto:
+    driver: bridge
+
+# Volume para salvar os dados no seu Windows (não perde dados se o container parar)
+volumes:
+  postgres_data:
